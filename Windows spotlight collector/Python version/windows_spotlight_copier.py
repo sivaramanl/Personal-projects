@@ -11,15 +11,20 @@ import webbrowser
 
 
 class SpotlightHandler:
-    windows_spotlight_path = "C:\\Users\\suji1\\AppData\\Local\\Packages\\Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy\\LocalState\\Assets"
-    copy_folder_root = "D:\\OneDrive\\Photos\\General\\Windows_Spotlight\\Data"
-    config_file = "D:\OneDrive\Photos\General\Windows_Spotlight\Config\\config.txt"
+    # windows_spotlight_path = "C:\\Users\\suji1\\AppData\\Local\\Packages\\Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy\\LocalState\\Assets"
+    # copy_folder_root = "D:\\OneDrive\\Photos\\General\\Windows_Spotlight\\Data"
+    # config_file = "D:\OneDrive\Photos\General\Windows_Spotlight\config\config.txt"
     # Only files with size > size_threshold (in KB) will be copied
-    # This is to filter non-spotlight images but is not fool proof. Have to rethink
+    # This is to filter non-spotlight images.
     size_threshold_kb = 300
 
+    windows_spotlight_path = None
+    copy_folder_root = None
+    config_file = None
+    error_url = "https://github.com/sivaramanl/Personal-projects/blob/master/Windows%20spotlight%20collector/Python%20version/windows_spotlight_error.txt"
+
     def __init__(self):
-        self.handleInvokeError()
+        print(os.getlogin())
         if self.alreadyHandledForToday():
             return
 
@@ -35,7 +40,7 @@ class SpotlightHandler:
             self.handleInvokeError()
 
     # This method reads the config file that contains the date the handler was invoked last
-    # It ensures that this handler doesn't redo work based on current data as data is expected to change on a daily basis
+    # Ensures that this handler doesn't redo work based on current data as data is expected to change on a daily basis
     # but the handler will be invoked multiple times per day.
     def alreadyHandledForToday(self):
         dateVal = None
@@ -56,12 +61,8 @@ class SpotlightHandler:
         f.close()
 
     def handleInvokeError(self):
-        #This block of code intends to let the end user know that the handler failed to be launched
-        url = "https://github.com/sivaramanl/Personal-projects/blob/master/Windows%20spotlight%20collector/Python%20version/windows_spotlight_error.html"
-        #chrome_path = "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
-        #webbrowser.register('chrome', None, webbrowser.BackgroundBrowser(chrome_path))
-        #webbrowser.get('chrome').open(url)
-        webbrowser.open(url)
+        # This block of code intends to let the end user know that the handler failed to be launched
+        webbrowser.open(self.error_url)
 
     def ensurePathAvailability(self):
         if not os.path.exists(self.windows_spotlight_path):
@@ -73,8 +74,8 @@ class SpotlightHandler:
     def isJPGorJPEG(self, filePath):
         with open(filePath, "rb") as f:
             hexVal = f.read(3).hex()
-            #https://en.wikipedia.org/wiki/List_of_file_signatures
-            #Hex value of jp(e)g image file signature begins as "FF D8 FF"
+            # https://en.wikipedia.org/wiki/List_of_file_signatures
+            # Hex value of jp(e)g image file signature begins as "FF D8 FF"
             if "ffd8ff" == hexVal:
                 return True
         return False
