@@ -4,7 +4,7 @@
 <br>
 Do you like the Windows spotlight feature? I have, for a long time. If you are wondering what it is, <a href="https://en.wikipedia.org/wiki/Windows_Spotlight">Wikipedia</a> is here to help.
 
-The highlight of the feature is the high definition images that are refreshed regularly. This naturally means that the images are out of reach to the end user.
+The highlight of the feature is that the high definition images that are refreshed regularly. This naturally means that the images are out of reach to the end user.
 
 This small project intends to create a means to collect the Spotlight images. Please be aware that some data might be licensed and thus this tool must be utilized with caution.
 
