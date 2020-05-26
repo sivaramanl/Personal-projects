@@ -68,7 +68,12 @@ class SpotlightHandler:
         if self.config_file is None or self.config_file == "":
             self.config_file = current_dir + os.path.sep + "config" + os.path.sep + "config.txt"
         if self.windows_spotlight_path is None or self.windows_spotlight_path == "":
-            self.windows_spotlight_path = "C:" + os.path.sep + "Users" + os.path.sep + os.getlogin() + os.path.sep + "AppData" + os.path.sep + "Local" + os.path.sep + "Packages" + os.path.sep + "Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy" + os.path.sep + "LocalState" + os.path.sep + "Assets"
+            candidate_path = "C:" + os.path.sep + "Users" + os.path.sep + os.getlogin() + os.path.sep + "AppData" + os.path.sep + "Local" + os.path.sep + "Packages"
+            candidate_files = os.listdir(candidate_path)
+            for entry in candidate_files:
+                if entry.startswith("Microsoft.Windows.ContentDeliveryManager"):
+                    self.windows_spotlight_path = "C:" + os.path.sep + "Users" + os.path.sep + os.getlogin() + os.path.sep + "AppData" + os.path.sep + "Local" + os.path.sep + "Packages" + os.path.sep + entry + os.path.sep + "LocalState" + os.path.sep + "Assets"
+                    break
         if self.copy_folder_root is None or self.copy_folder_root == "":
             self.copy_folder_root = current_dir + os.path.sep + "data"
 
