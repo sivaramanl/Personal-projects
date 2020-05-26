@@ -1,0 +1,1 @@
+schtasks /CREATE /TN "Windows_spotlight_collector" /XML "%~dp0\windows_spotlight_copier.xml"

@@ -1,1 +1,0 @@
-schtasks /CREATE /TN "Windows_spotlight_collector" /XML "D:\OneDrive\Photos\General\Windows_Spotlight\Source_code\Modifier\Windows_spotlight_handler_custom.xml"
