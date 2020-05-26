@@ -1,7 +1,5 @@
 <Task xmlns="http://schemas.microsoft.com/windows/2004/02/mit/task" version="1.2">
   <RegistrationInfo>
-    <Date>2020-01-19T22:38:03.8706999</Date>
-    <Author>DESKTOP-5QE20D7\suji1</Author>
     <URI>\Windows_spotlight_handler_custom</URI>
   </RegistrationInfo>
   <Triggers>
