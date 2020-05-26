@@ -5,12 +5,12 @@ Created on Mon May 25 20:01:19 2020
 """
 
 import os
-import datetime
-from datetime import date
-import webbrowser
 import shutil
+import datetime
+import webbrowser
 
-class spotlight_handler:
+
+class SpotlightHandler:
     windows_spotlight_path = "C:\\Users\\suji1\\AppData\\Local\\Packages\\Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy\\LocalState\\Assets"
     copy_folder_root = "D:\\OneDrive\\Photos\\General\\Windows_Spotlight\\Data"
     config_file = "D:\OneDrive\Photos\General\Windows_Spotlight\Config\\config.txt"
@@ -19,6 +19,7 @@ class spotlight_handler:
     size_threshold_kb = 300
 
     def __init__(self):
+        self.handleInvokeError()
         if self.alreadyHandledForToday():
             return
 
@@ -38,7 +39,7 @@ class spotlight_handler:
     # but the handler will be invoked multiple times per day.
     def alreadyHandledForToday(self):
         dateVal = None
-        curDate = date.today()
+        curDate = datetime.date.today()
         if os.path.exists(self.config_file):
             f = open(self.config_file, "r")
             storedDate = f.read().strip()
@@ -51,15 +52,16 @@ class spotlight_handler:
 
     def updateConfigFile(self):
         f = open(self.config_file, "w")
-        f.write(str(date.today()))
+        f.write(str(datetime.date.today()))
         f.close()
 
     def handleInvokeError(self):
         #This block of code intends to let the end user know that the handler failed to be launched
-        url = "https://en.wikipedia.org/wiki/Windows_Spotlight"
-        chrome_path = "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
-        webbrowser.register('chrome', None, webbrowser.BackgroundBrowser(chrome_path))
-        webbrowser.get('chrome').open(url)
+        url = "https://github.com/sivaramanl/Personal-projects/blob/master/Windows%20spotlight%20collector/Python%20version/windows_spotlight_error.html"
+        #chrome_path = "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
+        #webbrowser.register('chrome', None, webbrowser.BackgroundBrowser(chrome_path))
+        #webbrowser.get('chrome').open(url)
+        webbrowser.open(url)
 
     def ensurePathAvailability(self):
         if not os.path.exists(self.windows_spotlight_path):
@@ -68,7 +70,7 @@ class spotlight_handler:
             return False
         return True
 
-    def isJPGorJPEF(self, filePath):
+    def isJPGorJPEG(self, filePath):
         with open(filePath, "rb") as f:
             hexVal = f.read(3).hex()
             #https://en.wikipedia.org/wiki/List_of_file_signatures
@@ -84,11 +86,13 @@ class spotlight_handler:
                 continue
 
             src = self.windows_spotlight_path + os.path.sep + entry
-            if self.isJPGorJPEF(src) and os.path.getsize(src) >= self.size_threshold:
+            if self.isJPGorJPEG(src) and os.path.getsize(src) >= self.size_threshold:
                 shutil.copy(src, dest)
 
+
 def main():
-    spotlight_handler()
+    SpotlightHandler()
+
 
 if __name__ == '__main__':
     main()
