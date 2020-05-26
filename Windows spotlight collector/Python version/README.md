@@ -1,4 +1,4 @@
-# Windows spotlight copier
+# Windows spotlight collector
 
 <b>Introduction</b>
 <br>
