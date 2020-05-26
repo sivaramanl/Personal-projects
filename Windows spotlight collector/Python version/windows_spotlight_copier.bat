@@ -1,0 +1,1 @@
+python "D:\\OneDrive\\Photos\\General\\Windows_Spotlight\\Source_code\\windows_spotlight_copier.py"
