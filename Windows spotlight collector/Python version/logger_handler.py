@@ -12,7 +12,7 @@ import datetime
 
 # Custom logger to be used across modules
 class logger_handler:
-    log_dir = os.getcwd() + os.path.sep + "logs"
+    log_dir = os.path.dirname(__file__) + os.path.sep + "logs"
     log_level_DEBUG = 'DEBUG'
     log_level_INFO = 'INFO'
     log_level_WARNING = 'WARNING'

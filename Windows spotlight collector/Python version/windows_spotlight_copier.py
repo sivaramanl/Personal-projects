@@ -47,7 +47,7 @@ class SpotlightHandler:
             self.handle_invoke_error()
 
     def load_config(self):
-        current_dir = os.getcwd()
+        current_dir = os.path.dirname(__file__)
         self.system_config_file = current_dir + os.path.sep + "config" + os.path.sep + "spotlight_config"
 
         if not os.path.exists(self.system_config_file):
