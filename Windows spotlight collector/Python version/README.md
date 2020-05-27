@@ -8,6 +8,10 @@ The highlight of the feature is that the high definition images that are refresh
 
 This small project intends to create a means to collect the Spotlight images. Please be aware that some data might be licensed and thus this tool must be utilized with caution.
 
+<b>Compatibility</b>
+<br>
+Windows 10
+<br><br>
 <b>Pre-requisites</b>
 <br>
 Python version 3.7 and higher.
