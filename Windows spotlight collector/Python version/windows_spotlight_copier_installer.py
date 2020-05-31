@@ -5,23 +5,20 @@ Created on Mon May 25 20:01:19 2020
 """
 
 import os
+import pathlib
 import xml.etree.ElementTree as ET
 
 
 def update_xml():
-    xml_tree = ET.parse(os.path.dirname(__file__) + os.path.sep + "windows_spotlight_copier.xml")
+    current_dir = str(pathlib.Path(__file__).parent.absolute())
+    namespaces = {'schema': 'http://schemas.microsoft.com/windows/2004/02/mit/task'}
+    ET.register_namespace('', namespaces['schema'])
+    xml_tree = ET.parse(current_dir + os.path.sep + "windows_spotlight_copier.xml")
     xml_root = xml_tree.getroot()
-    for i in range(len(xml_root)):
-        if "Actions" in xml_root[i].tag:
-            for j in range(len(xml_root[i])):
-                if "Exec" in xml_root[i][j].tag:
-                    for k in range(len(xml_root[i][j])):
-                        if "Command" in xml_root[i][j][k].tag:
-                            xml_root[i][j][k].text = os.path.dirname(__file__) + os.path.sep + "windows_spotlight_copier.bat"
-                            break
+    target_node = xml_root.find('schema:Actions', namespaces).find('schema:Exec', namespaces).find('schema:Command', namespaces)
+    target_node.text = current_dir + os.path.sep + "windows_spotlight_copier.bat"
 
-    ET.register_namespace('', "http://schemas.microsoft.com/windows/2004/02/mit/task")
-    xml_tree.write(os.path.dirname(__file__) + os.path.sep + "windows_spotlight_copier.xml")
+    xml_tree.write(current_dir + os.path.sep + "windows_spotlight_copier.xml")
 
 
 def main():

@@ -6,13 +6,14 @@ Created on Sat Apr 25 20:01:19 2020
 """
 
 import os
+import pathlib
 import logging
 import datetime
 
 
 # Custom logger to be used across modules
 class logger_handler:
-    log_dir = os.path.dirname(__file__) + os.path.sep + "logs"
+    log_dir = str(pathlib.Path(__file__).parent.absolute()) + os.path.sep + "logs"
     log_level_DEBUG = 'DEBUG'
     log_level_INFO = 'INFO'
     log_level_WARNING = 'WARNING'

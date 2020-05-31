@@ -6,6 +6,7 @@ Created on Mon May 25 20:01:19 2020
 
 import os
 import shutil
+import pathlib
 import datetime
 import webbrowser
 from logger_handler import *
@@ -47,7 +48,7 @@ class SpotlightHandler:
             self.handle_invoke_error()
 
     def load_config(self):
-        current_dir = os.path.dirname(__file__)
+        current_dir = str(pathlib.Path(__file__).parent.absolute())
         self.system_config_file = current_dir + os.path.sep + "config" + os.path.sep + "spotlight_config"
 
         if not os.path.exists(self.system_config_file):
